@@ -1,73 +1,87 @@
 package com.productivity.productivitytracker;
 
-import com.productivity.productivitytracker.UIColors;
-
 import javax.swing.*;
-import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TimerView {
+public class TimerView extends JFrame {
 
-    //LoginController controller = new LoginController();
+    private Timer timer;
+    private int seconds = 0;
 
-    JFrame frame = new JFrame("Login");
-    JButton logButton = new JButton("Log in");
-    JButton registerButton = new JButton("Register new account");
-    JLabel labelUser = new JLabel("Username: ");
-    JTextField textFieldUser = new JTextField();
-    JLabel labelPassword = new JLabel("Password: ");
-    JTextField textFieldPassword = new JTextField();
+    private JLabel timerLabel;
 
-    JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-    JPanel panel3 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    public TimerView() {
+        setTitle("Timer Example");
+        setSize(400, 150);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        timerLabel = new JLabel("Time: 0:00:00", SwingConstants.CENTER);
+        JButton startButton = new JButton("Start");
+        JButton stopButton = new JButton("Stop");
+        JButton openClassView1Button = new JButton("Open ClassView1");
+        JButton openClassView2Button = new JButton("Open ClassView2");
 
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startTimer();
+            }
+        });
 
-    public TimerView(){
-        //controller.setView(this);
-
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(new Dimension(350, 350));
-        frame.setLocation(300, 200);
-        frame.setLayout(new GridLayout(3,1));
-
-//        panel1.setOpaque(false);
-//        panel2.setOpaque(false);
-//        panel3.setOpaque(false);
-
-
-        textFieldUser.setPreferredSize(new Dimension(100, 19));
-        textFieldPassword.setPreferredSize(new Dimension(100, 19));
-        logButton.setFocusable(false);
-        registerButton.setFocusable(false);
-
-        panel1.add(labelUser);
-        panel1.add(textFieldUser);
-        frame.add(panel1);
-        panel2.add(labelPassword);
-        panel2.add(textFieldPassword);
-        frame.add(panel2);
-        panel3.add(registerButton);
-        panel3.add(logButton);
-        frame.add(panel3);
-
-        frame.getContentPane().setBackground(UIColors.BACKGROUND.color);
-        frame.setVisible(true);
-
-        //logButton.addActionListener(e -> controller.checkUser());
-        //registerButton.addActionListener(e -> controller.registerNew());
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stopTimer();
+            }
+        });
 
 
+
+        timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seconds++;
+                updateTimerLabel();
+            }
+        });
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(timerLabel);
+        panel.add(startButton);
+        panel.add(stopButton);
+        panel.add(openClassView1Button);
+        panel.add(openClassView2Button);
+
+        add(panel);
     }
 
-    public String getUsername(){
-        return textFieldUser.getText();
-    }
-    public String getPassword(){
-        return textFieldPassword.getText();
+    private void startTimer() {
+        timer.start();
     }
 
-    public void closeView(){
-        this.frame.setVisible(false);
+    private void stopTimer() {
+        timer.stop();
+        updateTimerLabel();
     }
 
+    private void updateTimerLabel() {
+        int hours = seconds / 3600;
+        int minutes = (seconds % 3600) / 60;
+        int secs = seconds % 60;
+
+        String timeString = String.format("Time: %02d:%02d:%02d", hours, minutes, secs);
+        timerLabel.setText(timeString);
+    }
+
+
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new TimerView().setVisible(true);
+            }
+        });
+    }
 }
