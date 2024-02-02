@@ -27,4 +27,14 @@
   <extensions defaultExtensionNs="com.intellij">
 
   </extensions>
+
+  <actions>
+    <action id="com.productivity.productivitytracker" class="com.productivity.productivitytracker.App" text="productivity-tracker">
+      <add-to-group
+          group-id="ToolsMenu"
+          anchor="first"
+      />
+    </action>
+
+  </actions>
 </idea-plugin>
