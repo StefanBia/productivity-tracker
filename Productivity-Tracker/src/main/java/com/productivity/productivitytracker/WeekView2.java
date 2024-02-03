@@ -5,12 +5,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class WeekView {
+public class WeekView2 {
 
     JFrame frame = new JFrame("Your stats");
 
     ArrayList<ArrayList<Integer>> intervals = new ArrayList<ArrayList<Integer>>();
-    ArrayList<Integer> dates  = new ArrayList<Integer>(Arrays.asList(7, 8, 9, 10, 11, 12, 13));
+    ArrayList<Integer> dates  = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     ArrayList<Integer> times  = new ArrayList<Integer>(Arrays.asList(44, 89, 3, 55, 45, 88, 76));
 
     final int LABEL_HEIGHT = 45;
@@ -23,7 +23,7 @@ public class WeekView {
     int y, x;
 
 
-    public WeekView(int userId){
+    public WeekView2(int userId){
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setBackground(UIColors.BACKGROUND.color);
         frame.getContentPane().setBackground(UIColors.BACKGROUND.color);
@@ -33,10 +33,12 @@ public class WeekView {
             intervals.add(a);
         }
 
-        intervals.set(0, new ArrayList<Integer>(Arrays.asList(35, 40, 22, 170)));
-        intervals.set(1, new ArrayList<Integer>(Arrays.asList(65, 20)));
-        intervals.set(4, new ArrayList<Integer>(Arrays.asList(15, 15, 15, 20, 15)));
-        intervals.set(6, new ArrayList<Integer>(Arrays.asList(15)));
+        intervals.set(0, new ArrayList<Integer>(Arrays.asList(80, 40, 40)));
+        intervals.set(2, new ArrayList<Integer>(Arrays.asList(40, 45, 39 ,30)));
+        intervals.set(3, new ArrayList<Integer>(Arrays.asList(11, 14, 20, 25, 25, 25)));
+        intervals.set(4, new ArrayList<Integer>(Arrays.asList(20, 20, 20)));
+        intervals.set(5, new ArrayList<Integer>(Arrays.asList(20, 25, 20, 15)));
+        intervals.set(6, new ArrayList<Integer>(Arrays.asList(35, 40, 22, 170)));
 
         int max = 0;
         for(int i = 0; i < 7; i++){
@@ -58,7 +60,7 @@ public class WeekView {
         for(int i = 0; i<7; i++){
             x = i*100 + SPACE;
             y = H - SPACE - LABEL_HEIGHT - LABEL_HEIGHT;
-//            System.out.println("Y = " + y);
+            System.out.println("Y = " + y);
             JLabel l = new JLabel(String.valueOf(dates.get(i)) + ".01" );
             l.setLayout(null);
             l.setHorizontalAlignment(SwingConstants.CENTER);
@@ -102,11 +104,11 @@ public class WeekView {
         Font largerFont = new Font(nextButton.getFont().getName(), Font.PLAIN, 18);
         backButton.setFont(largerFont);
         nextButton.setFont(largerFont);
-//        backButton.setBackground(UIColors.RESULT.color);
-//        nextButton.setBackground(UIColors.RESULT.color);
+        backButton.setBackground(UIColors.RESULT.color);
+        nextButton.setBackground(UIColors.RESULT.color);
         backButton.setForeground(UIColors.BACKGROUND.color);
         nextButton.setForeground(UIColors.BACKGROUND.color);
-        backButton.addActionListener(e -> goBack());
+        nextButton.addActionListener( e -> goNext() );
         backButton.setLayout(null);
         nextButton.setLayout(null);
         backButton.setBounds(100+SPACE, SPACE, LABEL_WIDTH/2, LABEL_HEIGHT/2);
@@ -126,9 +128,14 @@ public class WeekView {
         frame.setVisible(true);
     }
 
-    private void goBack() {
-        WeekView2 nv = new WeekView2(4);
+    private void goNext() {
+        WeekView nv = new WeekView(4);
         frame.setVisible(false);
+    }
+
+    private void goBack() {
+//        WeekView nv = new WeekView(4);
+//        frame.setVisible(false);
     }
 
 }
