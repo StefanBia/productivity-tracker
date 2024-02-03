@@ -73,8 +73,8 @@ public class TimerView extends JFrame {
         panel.add(startStopButton);
         panel.add(statsButton);
 
-        textFieldWork.setPreferredSize(new Dimension(65, 20));
-        textFieldBreak.setPreferredSize(new Dimension(65, 20));
+        textFieldWork.setPreferredSize(new Dimension(65, 22));
+        textFieldBreak.setPreferredSize(new Dimension(65, 22));
         panel1.add(labelWork);
         panel1.add(textFieldWork);
         panel.add(panel1);
@@ -84,7 +84,7 @@ public class TimerView extends JFrame {
 
         JPanel panell = new JPanel();
         panell.add(pathLabel);
-        pathTextField.setPreferredSize( new Dimension(65, 20) );
+        pathTextField.setPreferredSize( new Dimension(65, 22) );
         panell.add(pathTextField);
         panell.add(linesWrittenLabel);
 

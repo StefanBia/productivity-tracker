@@ -26,8 +26,8 @@ public class RegisterView {
 
         //frame.setLayout(new GridLayout(3,1));
 
-        textFieldUser.setPreferredSize(new Dimension(140, 19));
-        textFieldPassword.setPreferredSize(new Dimension(140, 19));
+        textFieldUser.setPreferredSize(new Dimension(140, 22));
+        textFieldPassword.setPreferredSize(new Dimension(140, 22));
         registerButton.setFocusable(false);
         registerButton.setPreferredSize(new Dimension(200, 30));
 

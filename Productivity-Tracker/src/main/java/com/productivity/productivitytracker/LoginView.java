@@ -32,8 +32,8 @@ public class LoginView {
 //        panel3.setOpaque(false);
 
 
-        textFieldUser.setPreferredSize(new Dimension(100, 19));
-        textFieldPassword.setPreferredSize(new Dimension(100, 19));
+        textFieldUser.setPreferredSize(new Dimension(100, 22));
+        textFieldPassword.setPreferredSize(new Dimension(100, 22));
         logButton.setFocusable(false);
         registerButton.setFocusable(false);
 
