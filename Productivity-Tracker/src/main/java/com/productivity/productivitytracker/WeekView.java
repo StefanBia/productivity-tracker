@@ -58,12 +58,13 @@ public class WeekView {
         for(int i = 0; i<7; i++){
             x = i*100 + SPACE;
             y = H - SPACE - LABEL_HEIGHT - LABEL_HEIGHT;
-            System.out.println("Y = " + y);
+//            System.out.println("Y = " + y);
             JLabel l = new JLabel(String.valueOf(dates.get(i)) + ".01" );
             l.setLayout(null);
             l.setHorizontalAlignment(SwingConstants.CENTER);
             l.setFont(new Font(l.getFont().getName(), Font.BOLD, 15));
             l.setBackground(UIColors.ACCENT.color);
+            l.setForeground(UIColors.BLACK_TEXT.color);
             //l.setOpaque(true);
             l.setBounds(x, y, LABEL_WIDTH, LABEL_HEIGHT);
             frame.add(l);
@@ -73,6 +74,7 @@ public class WeekView {
             l1.setLayout(null);
             l1.setHorizontalAlignment(SwingConstants.CENTER);
             l1.setBackground(UIColors.ACCENT.color);
+            l1.setForeground(UIColors.BLACK_TEXT.color);
             //l1.setOpaque(true);
             l1.setBounds(x, y, LABEL_WIDTH, LABEL_HEIGHT);
             frame.add(l1);
@@ -81,6 +83,7 @@ public class WeekView {
                 y -= (RESULT_SPACING + interval);
                 JLabel p = new JLabel(interval + " min.");
                 p.setBackground(UIColors.ACCENT.color);
+                p.setForeground(UIColors.BLACK_TEXT.color);
 //                p.setForeground(UIColors.TEXT.color);
                 p.setFont(new Font(p.getFont().getName(), Font.PLAIN, 11));
                 p.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,8 +102,8 @@ public class WeekView {
         Font largerFont = new Font(nextButton.getFont().getName(), Font.PLAIN, 18);
         backButton.setFont(largerFont);
         nextButton.setFont(largerFont);
-        backButton.setBackground(UIColors.RESULT.color);
-        nextButton.setBackground(UIColors.RESULT.color);
+//        backButton.setBackground(UIColors.RESULT.color);
+//        nextButton.setBackground(UIColors.RESULT.color);
         backButton.setForeground(UIColors.BACKGROUND.color);
         nextButton.setForeground(UIColors.BACKGROUND.color);
         backButton.setLayout(null);

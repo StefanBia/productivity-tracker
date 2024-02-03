@@ -27,9 +27,9 @@ public class LoginView {
         frame.setLocation(300, 200);
         frame.setLayout(new GridLayout(3,1));
 
-//        panel1.setOpaque(false);
-//        panel2.setOpaque(false);
-//        panel3.setOpaque(false);
+
+        labelUser.setForeground(UIColors.BLACK_TEXT.color);
+        labelPassword.setForeground(UIColors.BLACK_TEXT.color);
 
 
         textFieldUser.setPreferredSize(new Dimension(100, 22));
