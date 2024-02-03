@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class TimerView extends JFrame {
@@ -20,6 +24,12 @@ public class TimerView extends JFrame {
 
     private JButton startStopButton;
     private JButton statsButton;
+    private JTextField pathTextField = new JTextField();
+    private JLabel pathLabel = new JLabel("Path to the project you want to track:");
+    private JLabel linesWrittenLabel = new JLabel("");
+    private int initialLines;
+    private int finalLines;
+
 
 
     JLabel labelWork = new JLabel("Work time: ");
@@ -63,14 +73,22 @@ public class TimerView extends JFrame {
         panel.add(startStopButton);
         panel.add(statsButton);
 
-        textFieldWork.setPreferredSize(new Dimension(65, 19));
-        textFieldBreak.setPreferredSize(new Dimension(65, 19));
+        textFieldWork.setPreferredSize(new Dimension(65, 20));
+        textFieldBreak.setPreferredSize(new Dimension(65, 20));
         panel1.add(labelWork);
         panel1.add(textFieldWork);
         panel.add(panel1);
         panel2.add(labelBreak);
         panel2.add(textFieldBreak);
         panel.add(panel2);
+
+        JPanel panell = new JPanel();
+        panell.add(pathLabel);
+        pathTextField.setPreferredSize( new Dimension(65, 20) );
+        panell.add(pathTextField);
+        panell.add(linesWrittenLabel);
+
+        panel.add(panell);
 
         add(panel);
     }
@@ -91,6 +109,12 @@ public class TimerView extends JFrame {
         isRunning = true;
         startStopButton.setText("Stop");
         startTime = LocalDateTime.now();
+        if(!pathTextField.getText().equals("")){
+            initialLines = getActualLines(pathTextField.getText());
+        }
+        else{
+            initialLines = 0;
+        }
 
         if (isMainTimerPaused) {
             timer.restart();
@@ -139,6 +163,14 @@ public class TimerView extends JFrame {
         startStopButton.setText("Start");
         endTime = LocalDateTime.now();
         System.out.println("Start: " + startTime+'\n'+"Stop: " + endTime);
+
+        if(!pathTextField.getText().equals("")){
+            finalLines = getActualLines(pathTextField.getText());
+            linesWrittenLabel.setText(Integer.toString(finalLines - initialLines) + " lines written");
+        }
+        else{
+            finalLines = 0;
+        }
 
         if (timer != null) {
             timer.stop();
@@ -191,6 +223,24 @@ public class TimerView extends JFrame {
 
         String countdownString = String.format("Countdown: %02d:%02d", minutes, secs);
         countdownLabel.setText(countdownString);
+    }
+    public static int getActualLines(String path){
+        File projectDirectory = new File(path);
+        int lineCount = 0;
+        for (File file : projectDirectory.listFiles()) {
+            if (file.isFile() && (file.getName().endsWith(".java") )) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    while (reader.readLine() != null) {
+                        lineCount++;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if(file.isDirectory()){
+                lineCount += getActualLines(file.getPath());
+            }
+        }
+        return lineCount;
     }
 
 
