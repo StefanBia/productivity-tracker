@@ -39,6 +39,11 @@ public class TimerView extends JFrame {
 
     JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelMainTimer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelCountdownTimer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelButtonStart = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelButtonStats = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
 
     private boolean isRunning = false;
     private boolean isMainTimerPaused = false;
@@ -48,7 +53,7 @@ public class TimerView extends JFrame {
 
     public TimerView() {
         setTitle("Timer Example");
-        setSize(400, 200);
+        setSize(400, 250);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         timerLabel = new JLabel("Time: 0:00:00", SwingConstants.CENTER);
@@ -68,10 +73,16 @@ public class TimerView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(timerLabel);
-        panel.add(countdownLabel);
-        panel.add(startStopButton);
-        panel.add(statsButton);
+
+        panelMainTimer.add(timerLabel);
+        panelCountdownTimer.add(countdownLabel);
+        panelButtonStart.add(startStopButton);
+        panelButtonStats.add(statsButton);
+        panel.add(panelMainTimer);
+        panel.add(panelCountdownTimer);
+        panel.add(panelButtonStart);
+        panel.add(panelButtonStats);
+
 
         textFieldWork.setPreferredSize(new Dimension(65, 22));
         textFieldBreak.setPreferredSize(new Dimension(65, 22));
@@ -148,7 +159,8 @@ public class TimerView extends JFrame {
                 countdownSeconds--;
                 updateCountdownLabel();
                 if (countdownSeconds == 0) {
-                    stopTimers();
+                    countdownTimer.stop();
+                    JOptionPane.showMessageDialog(null,"You should take a break!");
                 }
             }
         });
@@ -197,8 +209,8 @@ public class TimerView extends JFrame {
                 countdownSeconds--;
                 updateCountdownLabel();
                 if (countdownSeconds == 0) {
-                    stopTimers();
-                    JOptionPane.showMessageDialog(null,"Time Ended");
+                    countdownTimer.stop();
+                    JOptionPane.showMessageDialog(null,"Break time is over. Get back to work!");
                 }
             }
         });
