@@ -1,7 +1,7 @@
+package com.productivity.productivitytracker;
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,7 +24,7 @@ public class WeekView {
 
 
     public WeekView(int userId){
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setBackground(UIColors.BACKGROUND.color);
         frame.getContentPane().setBackground(UIColors.BACKGROUND.color);
 

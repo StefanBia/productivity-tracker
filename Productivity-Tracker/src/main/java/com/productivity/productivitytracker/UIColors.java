@@ -3,8 +3,10 @@ package com.productivity.productivitytracker;
 import java.awt.*;
 
 public enum UIColors {
-    BACKGROUND(new Color(175, 190, 162)),
-    RESULT(new Color(156, 180, 172));
+    BACKGROUND(new Color(254, 250, 224)),
+    ACCENT(new Color(221, 161, 94)),
+    TEXT(new Color(188, 108, 37)),
+    RESULT(new Color(96, 108, 56));
 
     final public Color color;
 
@@ -12,3 +14,4 @@ public enum UIColors {
         this.color = col;
     }
 }
+

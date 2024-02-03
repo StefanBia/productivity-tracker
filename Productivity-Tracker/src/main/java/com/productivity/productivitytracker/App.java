@@ -15,14 +15,17 @@ public class App extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         // Create and launch JavaFX application
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                TimerView timerView = new TimerView();
-                timerView.setVisible(true);
-                System.out.println(getActualLines("/home/stefan/Stefan Projects/productivity-tracker/Productivity-Tracker"));
-            }
-        });
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                TimerView timerView = new TimerView();
+//                timerView.setVisible(true);
+//                System.out.println(getActualLines("/home/stefan/Stefan Projects/productivity-tracker/Productivity-Tracker"));
+//            }
+//        });
+
+        LoginView firstView = new LoginView();
+
     }
 
     public static int getActualLines(String path){

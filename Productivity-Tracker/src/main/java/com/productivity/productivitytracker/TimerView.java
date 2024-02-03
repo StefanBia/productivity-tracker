@@ -19,6 +19,8 @@ public class TimerView extends JFrame {
     private JLabel countdownLabel;
 
     private JButton startStopButton;
+    private JButton statsButton;
+
 
     JLabel labelWork = new JLabel("Work time: ");
     JTextField textFieldWork = new JTextField("25");
@@ -43,6 +45,7 @@ public class TimerView extends JFrame {
         countdownLabel = new JLabel("Countdown: 25:00", SwingConstants.CENTER);
 
         startStopButton = new JButton("Start");
+        statsButton = new JButton("View stats");
         startStopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,11 +54,14 @@ public class TimerView extends JFrame {
             }
         });
 
+        statsButton.addActionListener(e -> openStats());
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(timerLabel);
         panel.add(countdownLabel);
         panel.add(startStopButton);
+        panel.add(statsButton);
 
         textFieldWork.setPreferredSize(new Dimension(65, 19));
         textFieldBreak.setPreferredSize(new Dimension(65, 19));
@@ -67,6 +73,10 @@ public class TimerView extends JFrame {
         panel.add(panel2);
 
         add(panel);
+    }
+
+    private void openStats() {
+        WeekView nv = new WeekView(4);
     }
 
     private void startStopTimer() {
