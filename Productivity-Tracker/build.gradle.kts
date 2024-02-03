@@ -14,6 +14,7 @@ repositories {
 }
 
 
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
@@ -21,6 +22,12 @@ intellij {
   type.set("IC") // Target IDE Platform
 
   plugins.set(listOf(/* Plugin Dependencies */))
+}
+
+
+dependencies{
+  implementation ("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3")
+  implementation ("org.springframework.boot:spring-boot-starter-web")
 }
 
 tasks {

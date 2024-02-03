@@ -1,15 +1,32 @@
 package com.productivity.productivitytracker;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.intellij.remoteDev.downloader.TestJetBrainsClientDownloaderConfigurationProvider;
+import com.productivity.productivitytracker.entity.Work;
+
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 public class WeekView {
 
     JFrame frame = new JFrame("Your stats");
 
-    ArrayList<ArrayList<Integer>> intervals = new ArrayList<ArrayList<Integer>>();
+    private int userId;
+
+
+    ArrayList<ArrayList<Integer>> intervals = new ArrayList<ArrayList<Integer>>();//// datestop-datestart
+
+
+
+
     ArrayList<Integer> dates  = new ArrayList<Integer>(Arrays.asList(7, 8, 9, 10, 11, 12, 13));
     ArrayList<Integer> times  = new ArrayList<Integer>(Arrays.asList(44, 89, 3, 55, 45, 88, 76));
 
@@ -24,6 +41,56 @@ public class WeekView {
 
 
     public WeekView(int userId){
+        this.userId=userId;
+        ///API Call
+        try {
+
+            // Construct the URL with dynamic path parameters
+            String apiUrl = "http://localhost:8080/user/worksBetween/" + userId;
+            /*
+            // Create a URL object
+            URL url = new URL(apiUrl);
+
+            // Open a connection to the URL
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Set the request method to GET
+            connection.setRequestMethod("GET");
+
+            // Get the response code
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // Read the response from the input stream
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+
+                reader.close();
+                ObjectMapper objectMapper = new ObjectMapper();
+                ArrayList<Work> workList = objectMapper.readValue(response.toString(), new TypeReference<ArrayList<Work>>() {});
+
+
+            } else {
+                System.out.println("Error: " + responseCode);
+            }
+
+            // Close the connection
+            connection.disconnect();
+
+
+             */
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setBackground(UIColors.BACKGROUND.color);
         frame.getContentPane().setBackground(UIColors.BACKGROUND.color);

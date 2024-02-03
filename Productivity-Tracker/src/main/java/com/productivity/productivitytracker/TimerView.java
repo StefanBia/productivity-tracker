@@ -77,6 +77,7 @@ public class TimerView extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+
         panelMainTimer.add(timerLabel);
         panelCountdownTimer.add(countdownLabel);
         panelButtonStart.add(startStopButton);
@@ -89,6 +90,7 @@ public class TimerView extends JFrame {
 
         textFieldWork.setPreferredSize(new Dimension(65, 22));
         textFieldBreak.setPreferredSize(new Dimension(65, 22));
+
         panel1.add(labelWork);
         panel1.add(textFieldWork);
         panel.add(panel1);
@@ -98,7 +100,9 @@ public class TimerView extends JFrame {
 
         JPanel panell = new JPanel();
         panell.add(pathLabel);
+
         pathTextField.setPreferredSize( new Dimension(80, 22) );
+
         panell.add(pathTextField);
         panell.add(linesWrittenLabel);
 
@@ -181,6 +185,13 @@ public class TimerView extends JFrame {
 
         if(!pathTextField.getText().equals("")){
             finalLines = getActualLines(pathTextField.getText());
+
+            if(finalLines - initialLines < 0)
+            {
+                finalLines = 0;
+                initialLines = 0;
+            }
+
             linesWrittenLabel.setText(Integer.toString(finalLines - initialLines) + " lines written");
         }
         else{
