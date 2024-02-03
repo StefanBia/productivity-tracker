@@ -104,8 +104,8 @@ public class WeekView2 {
         Font largerFont = new Font(nextButton.getFont().getName(), Font.PLAIN, 18);
         backButton.setFont(largerFont);
         nextButton.setFont(largerFont);
-        backButton.setBackground(UIColors.RESULT.color);
-        nextButton.setBackground(UIColors.RESULT.color);
+//        backButton.setBackground(UIColors.RESULT.color);
+//        nextButton.setBackground(UIColors.RESULT.color);
         backButton.setForeground(UIColors.BACKGROUND.color);
         nextButton.setForeground(UIColors.BACKGROUND.color);
         nextButton.addActionListener( e -> goNext() );
