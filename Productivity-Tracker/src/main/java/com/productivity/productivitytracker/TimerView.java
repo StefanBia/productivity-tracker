@@ -39,6 +39,11 @@ public class TimerView extends JFrame {
 
     JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
     JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelMainTimer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelCountdownTimer = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelButtonStart = new JPanel(new FlowLayout(FlowLayout.CENTER));
+    JPanel panelButtonStats = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
 
     private boolean isRunning = false;
     private boolean isMainTimerPaused = false;
@@ -48,11 +53,14 @@ public class TimerView extends JFrame {
 
     public TimerView() {
         setTitle("Timer Example");
-        setSize(400, 200);
+        setSize(400, 270);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        timerLabel = new JLabel("Time: 0:00:00", SwingConstants.CENTER);
+        timerLabel = new JLabel("0:00:00", SwingConstants.CENTER);
+        timerLabel.setFont((new Font(timerLabel.getFont().getName(), timerLabel.getFont().getStyle(), timerLabel.getFont().getSize()+8)));
         countdownLabel = new JLabel("Countdown: 25:00", SwingConstants.CENTER);
+        countdownLabel.setFont((new Font(countdownLabel.getFont().getName(), countdownLabel.getFont().getStyle(), countdownLabel.getFont().getSize()+2)));
+
 
         startStopButton = new JButton("Start");
         statsButton = new JButton("View stats");
@@ -68,13 +76,21 @@ public class TimerView extends JFrame {
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.add(timerLabel);
-        panel.add(countdownLabel);
-        panel.add(startStopButton);
-        panel.add(statsButton);
 
-        textFieldWork.setPreferredSize(new Dimension(65, 20));
-        textFieldBreak.setPreferredSize(new Dimension(65, 20));
+
+        panelMainTimer.add(timerLabel);
+        panelCountdownTimer.add(countdownLabel);
+        panelButtonStart.add(startStopButton);
+        panelButtonStats.add(statsButton);
+        panel.add(panelMainTimer);
+        panel.add(panelCountdownTimer);
+        panel.add(panelButtonStart);
+        panel.add(panelButtonStats);
+
+
+        textFieldWork.setPreferredSize(new Dimension(65, 22));
+        textFieldBreak.setPreferredSize(new Dimension(65, 22));
+
         panel1.add(labelWork);
         panel1.add(textFieldWork);
         panel.add(panel1);
@@ -84,7 +100,9 @@ public class TimerView extends JFrame {
 
         JPanel panell = new JPanel();
         panell.add(pathLabel);
-        pathTextField.setPreferredSize( new Dimension(65, 20) );
+
+        pathTextField.setPreferredSize( new Dimension(80, 22) );
+
         panell.add(pathTextField);
         panell.add(linesWrittenLabel);
 
@@ -148,7 +166,8 @@ public class TimerView extends JFrame {
                 countdownSeconds--;
                 updateCountdownLabel();
                 if (countdownSeconds == 0) {
-                    stopTimers();
+                    countdownTimer.stop();
+                    JOptionPane.showMessageDialog(null,"You should take a break!");
                 }
             }
         });
@@ -166,11 +185,13 @@ public class TimerView extends JFrame {
 
         if(!pathTextField.getText().equals("")){
             finalLines = getActualLines(pathTextField.getText());
+
             if(finalLines - initialLines < 0)
             {
                 finalLines = 0;
                 initialLines = 0;
             }
+
             linesWrittenLabel.setText(Integer.toString(finalLines - initialLines) + " lines written");
         }
         else{
@@ -202,8 +223,8 @@ public class TimerView extends JFrame {
                 countdownSeconds--;
                 updateCountdownLabel();
                 if (countdownSeconds == 0) {
-                    stopTimers();
-                    JOptionPane.showMessageDialog(null,"Time Ended");
+                    countdownTimer.stop();
+                    JOptionPane.showMessageDialog(null,"Break time is over. Get back to work!");
                 }
             }
         });
@@ -218,7 +239,7 @@ public class TimerView extends JFrame {
         int minutes = (seconds % 3600) / 60;
         int secs = seconds % 60;
 
-        String timeString = String.format("Time: %02d:%02d:%02d", hours, minutes, secs);
+        String timeString = String.format("%02d:%02d:%02d", hours, minutes, secs);
         timerLabel.setText(timeString);
     }
 

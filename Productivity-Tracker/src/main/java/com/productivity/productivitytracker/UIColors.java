@@ -6,6 +6,7 @@ public enum UIColors {
     BACKGROUND(new Color(254, 250, 224)),
     ACCENT(new Color(221, 161, 94)),
     TEXT(new Color(188, 108, 37)),
+    BLACK_TEXT(Color.darkGray),
     RESULT(new Color(96, 108, 56));
 
     final public Color color;

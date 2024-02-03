@@ -39,14 +39,17 @@ public class LoginView {
         frame.setLocation(300, 200);
         frame.setLayout(new GridLayout(3,1));
 
-//        panel1.setOpaque(false);
-//        panel2.setOpaque(false);
-//        panel3.setOpaque(false);
+
         int id;
 
 
-        textFieldUser.setPreferredSize(new Dimension(100, 19));
-        textFieldPassword.setPreferredSize(new Dimension(100, 19));
+
+        labelUser.setForeground(UIColors.BLACK_TEXT.color);
+        labelPassword.setForeground(UIColors.BLACK_TEXT.color);
+
+
+        textFieldUser.setPreferredSize(new Dimension(100, 22));
+        textFieldPassword.setPreferredSize(new Dimension(100, 22));
         logButton.setFocusable(false);
         registerButton.setFocusable(false);
 

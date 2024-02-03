@@ -25,9 +25,11 @@ public class RegisterView {
         frame.setLocation(300, 200);
 
         //frame.setLayout(new GridLayout(3,1));
+        labelUser.setForeground(UIColors.BLACK_TEXT.color);
+        labelPassword.setForeground(UIColors.BLACK_TEXT.color);
 
-        textFieldUser.setPreferredSize(new Dimension(140, 19));
-        textFieldPassword.setPreferredSize(new Dimension(140, 19));
+        textFieldUser.setPreferredSize(new Dimension(140, 22));
+        textFieldPassword.setPreferredSize(new Dimension(140, 22));
         registerButton.setFocusable(false);
         registerButton.setPreferredSize(new Dimension(200, 30));
 
