@@ -1,8 +1,20 @@
 package com.productivity.productivitytracker;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
+import net.minidev.json.JSONObject;
+import net.minidev.json.JSONValue;
+
 import javax.swing.*;
 import java.awt.*;
+import java.net.MalformedURLException;
 import java.util.Objects;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LoginView {
 
@@ -30,6 +42,7 @@ public class LoginView {
 //        panel1.setOpaque(false);
 //        panel2.setOpaque(false);
 //        panel3.setOpaque(false);
+        int id;
 
 
         textFieldUser.setPreferredSize(new Dimension(100, 19));
@@ -54,7 +67,13 @@ public class LoginView {
         registerButton.setBackground(UIColors.ACCENT.color);
 
 
-        logButton.addActionListener(e -> tryLogin());
+        logButton.addActionListener(e -> {
+            try {
+                tryLogin();
+            } catch (MalformedURLException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         registerButton.addActionListener(e -> registerNew());
 
 
@@ -76,7 +95,7 @@ public class LoginView {
         this.frame.setVisible(false);
     }
 
-    private void tryLogin(){
+    private void tryLogin() throws MalformedURLException {
         int id = 4;
         if (Objects.equals(textFieldUser.getText(), "")){
             JOptionPane.showMessageDialog(null, "Empty username!");
@@ -87,7 +106,53 @@ public class LoginView {
             return;
         }
         // TODO Please Check!
+        try {
+        String userName = textFieldUser.getText();
+        String password = textFieldPassword.getText();
 
+        // Construct the URL with dynamic path parameters
+        String apiUrl = "http://localhost:8080/user/" + userName + "/" + password;
+
+        // Create a URL object
+        URL url = new URL(apiUrl);
+
+        // Open a connection to the URL
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        // Set the request method to GET
+        connection.setRequestMethod("GET");
+
+        // Get the response code
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            // Read the response from the input stream
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuilder response = new StringBuilder();
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+
+            reader.close();
+
+            // Print the response
+            System.out.println("Response from server:\n" + response.toString());
+            JSONObject jsonObject = (JSONObject) JSONValue.parse(response.toString());
+            id = Integer.parseInt(jsonObject.getAsNumber("userId").toString());
+            System.out.println(id);
+
+
+        } else {
+            System.out.println("Error: " + responseCode);
+        }
+
+        // Close the connection
+        connection.disconnect();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -96,7 +161,8 @@ public class LoginView {
             }
         });
 
-//        WeekView nv = new WeekView(id);
+        ///TODO
+        WeekView nv = new WeekView(id);
 
         closeView();
     }
